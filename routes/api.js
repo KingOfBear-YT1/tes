@@ -39,10 +39,10 @@ router.get('/download/tiktokview', async (req, res, next) => {
 })
 
 router.get('/download/tiktokstalk2', async (req, res, next) => {
-	var username = req.query.username
-	if (!username ) return res.json(loghandler.notname)
+	var query = req.query.username
+	if (!query ) return res.json(loghandler.notquery)
 
-    TikTokScraper.user(username)
+    TikTokScraper.user(query)
 .then(data => {
 	var result = data
 	res.json({
