@@ -39,7 +39,7 @@ router.get('/download/tiktokview', async (req, res, next) => {
 })
 
 router.get('/download/tiktokstalk2', async (req, res, next) => {
-	var query = req.query.username
+	var query = req.query.query
 	if (!query ) return res.json(loghandler.notquery)
 
     TikTokScraper.user(query)
@@ -61,6 +61,25 @@ router.get('/download/tiktokstalk3', async (req, res, next) => {
 	var username = req.query.username
 	if (!username ) return res.json(loghandler.noturl)
     TikTokScraper.getAllVideosFromUser(username)
+.then(data => {
+	var result = data
+	res.json({
+	status: true,
+	creator: `${creator}`,
+		result
+	})
+	})
+	 .catch(e => {
+	
+		res.json(loghandler.notquery)
+})
+})
+
+router.get('/download/tiktokstalk4', async (req, res, next) => {
+	var query = req.query.query
+	if (!query ) return res.json(loghandler.notquery)
+
+    TikTokScraper.downloadAllVideosFromUser(query)
 .then(data => {
 	var result = data
 	res.json({
